@@ -19,7 +19,7 @@ const PeopleCard = ({ name }) => {
                 </div>
             </div>
             <div className="col">
-                <div className="card ms-5 my-4" style={{width: "18rem"}}>
+                <div className="card  my-4" style={{width: "18rem"}}>
                     <img src="" className="card-img-top" alt=""/>
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
