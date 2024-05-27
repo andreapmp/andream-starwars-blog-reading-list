@@ -9,6 +9,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import PeopleDetails from "./views/PeopleDetails.jsx";
 
 //create your first component
 const Layout = () => {
@@ -23,17 +24,7 @@ const Layout = () => {
 					<Navbar />
 					<Routes>
 						<Route path="/" element={<Home />} />
-						{/*
-							We will need a:
-							favorites page
-							saved for later page
-							single person details page /person/:id
-							single vehicle datails /vehicles/:id
-							single planet details page /planets/:id
-						*/}
-						<Route path="/demo" element={<Demo />} />
-						<Route path="/single/:theid" element={<Single />} />
-						<Route path="*" element={<h1>Not found!</h1>} />
+						<Route path="/people/:id" element={<PeopleDetails />} />
 					</Routes>
 					<Footer />
 				</ScrollToTop>
