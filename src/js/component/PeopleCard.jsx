@@ -1,19 +1,30 @@
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import React from "react";
+import { Context } from "../store/appContext";
+
 
 const PeopleCard = ({ uid, name, url }) => {
+    const { store, actions} = useContext(Context)
+
+    useEffect (() => {
+        actions.getPeopleDetails
+    }, [])
 
     return (
         <div className="row d-inline-block">
             <div className="col">
                 <div className="card ms-5 my-4" style={{width: "18rem"}}>
-                    <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} className="card-img-top" alt={name}/>
+                    <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} className="card-img-top" alt=""/>
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
-                         
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Gender</li>
+                            <li class="list-group-item">Hair Color</li>
+                            <li class="list-group-item">Eye Color</li>
+                        </ul>
                         <Link to={`/people/${uid}`}>
                             <button className="btn btn-outline-primary me-5">
-                            Learn more
+                                Learn more
                             </button>
                         </Link>
                         <button type="button" className="btn btn-outline-warning ms-5 ">
@@ -25,7 +36,6 @@ const PeopleCard = ({ uid, name, url }) => {
                 </div>
             </div>
         </div>
-        
     );
 }
 
