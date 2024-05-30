@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+
 
 const PlanetCard = ({ name, uid, url }) => {
+
+    // useEffect(() => {
+    //    actions.getPeopleDetails(uid)
+    // }, [uid])
 
     return (
         <div className="row d-inline-block">

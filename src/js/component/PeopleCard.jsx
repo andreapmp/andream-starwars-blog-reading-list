@@ -4,11 +4,13 @@ import { Context } from "../store/appContext";
 
 
 const PeopleCard = ({ uid, name, url }) => {
-    const { store, actions} = useContext(Context)
+    const { store, actions} = useContext(Context);
 
-    useEffect (() => {
-        actions.getPeopleDetails
-    }, [])
+    useEffect(() => {
+        actions.getPeopleDetails(uid)
+    }, [uid])
+
+    const peopleDetails = store.peopleDetails[uid] || {};
 
     return (
         <div className="row d-inline-block">
@@ -17,10 +19,10 @@ const PeopleCard = ({ uid, name, url }) => {
                     <img src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} className="card-img-top" alt=""/>
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Gender</li>
-                            <li class="list-group-item">Hair Color</li>
-                            <li class="list-group-item">Eye Color</li>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">Gender: {peopleDetails.properties && peopleDetails.properties.gender}</li>
+                            <li className="list-group-item">Hair Color: {peopleDetails.properties && peopleDetails.properties.hair_color} </li>
+                            <li className="list-group-item">Eye Color: {peopleDetails.properties && peopleDetails.properties.gender}</li>
                         </ul>
                         <Link to={`/people/${uid}`}>
                             <button className="btn btn-outline-primary me-5">

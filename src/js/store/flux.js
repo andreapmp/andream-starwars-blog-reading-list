@@ -6,11 +6,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				description: "",
 				properties: {}
 			},
-
 			vehicles: [],
+			vehiclesDetails: {
+				decription: "",
+				properties: {}
+			},
 			planets: [],
+			planetDetails: {
+				description: "",
+				properties: {}
+			},
 			favorites: []
 		},
+
 		actions: {
 			getPeople: async () => {
 				const response = await fetch("https://www.swapi.tech/api/people/");
@@ -24,15 +32,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
 				if(!response.ok) {
 					throw new Error(response.status, response.statusText);
-			}	
+				}	
 			 	const data = await response.json();
 				const peopleDetails = {
 					description: data.result.description,
 					properties: {...data.result.properties}
 				}
 				setStore({peopleDetails: peopleDetails});
-
-
 			},
 			getVehicles: async () => {
 				const response = await fetch("https://www.swapi.tech/api/vehicles/");
