@@ -31,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getPeopleDetails: async (id) => {
 				const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
 				if(!response.ok) {
-					throw new Error(response.status, response.statusText);
+					throw new Error(`${response.status} - ${response.statusText}`);
 				}	
 			 	const data = await response.json();
 				const peopleDetails = {
@@ -46,9 +46,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					throw new Error(response.status, response.statusText);
 				}
 				const data = await response.json();
-				setStore({vehicles: data.results});
+				setStore({ vehicles: data.results });
 			},
-			getVehicleDetails: () => {},
+			getVehicleDetails: async (id) => {
+				const response = await fetch(`https://www.swapi.tech/api/vehicles/${id}`)
+				if (!response.ok) {
+					throw new Error(`${response.status} - ${response.statusText}`);
+				}
+				const data = await response.json();
+				const updatedVehicleDetails = {
+					description: data.result.description,
+					properties: {...data.result.properties}
+				}
+				setStore({ vehiclesDetails: updatedVehicleDetails });
+			},
 			getPlanets: async () => {
 				const response = await fetch("https://www.swapi.tech/api/planets/");
 				if(!response.ok) {
@@ -57,9 +68,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				setStore({planets: data.results})
 			},
-			getPlanetsDetails: () => {},
-			addFavorite: () => {},
-			removeFavorite: () => {}
+			getPlanetsDetails: async (id) => {
+				const response = await fetch(`https://www.swapi.tech/api/planets/${id}`)
+				if (!response.ok) {
+					throw new Error(`${response.status} - ${response.statusText}`);
+				}
+				const data = await response.json();
+				const updatedPlanetDetails = {
+					description: data.result.description,
+					properties: {...data.result.properties}
+				}
+				setStore({ planetDetails: updatedPlanetDetails });
+			},
+			addFavorite: (favorite) => {
+				let store = getStore();
+				store.favorites.push(favorite);
+				setStore({ favorite: store.favorite });
+			},
+			removeFavorite: (removeFav) => {
+				let store = getStore();
+				const updatedFavorites = store.favorites.filter(item => item !== removeFav);
+				setStore({ favorites: updatedFavorites })
+			}
 		}
 	};
 };

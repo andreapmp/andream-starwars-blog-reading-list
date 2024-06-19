@@ -4,10 +4,11 @@ import { Context } from "../store/appContext";
 
 
 const PlanetCard = ({ name, uid, url }) => {
+    const { store, actions} = useContext(Context);
 
-    // useEffect(() => {
-    //    actions.getPeopleDetails(uid)
-    // }, [uid])
+    useEffect(() => {
+        actions.getPeopleDetails(uid);
+    }, [uid]);
 
     return (
         <div className="row d-inline-block">
@@ -21,9 +22,9 @@ const PlanetCard = ({ name, uid, url }) => {
                     />
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Population</li>
-                            <li class="list-group-item">Terrain</li>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">Population: </li>
+                            <li className="list-group-item">Terrain</li>
                         </ul>
                         <Link to={`/people/${uid}`}>
                             <button className="btn btn-outline-primary me-5">
