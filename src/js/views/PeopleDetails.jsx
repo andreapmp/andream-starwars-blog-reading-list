@@ -5,11 +5,11 @@ import { Context } from "../store/appContext";
 
 const PeopleDetails = () => {
 	const { store, actions } = useContext(Context);
-	const params = useParams();
+	const { id }= useParams();
 
 	useEffect(() => {
-		actions.getPeopleDetails(params.id)
-	}, [])
+		actions.getPeopleDetails(id)
+	}, []);
 	
 	return (
 		<div className="jumbotron">
