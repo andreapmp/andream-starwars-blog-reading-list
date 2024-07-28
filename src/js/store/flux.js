@@ -31,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getPeopleDetails: async (id) => {
 				const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
 				if(!response.ok) {
-					throw new Error(`${response.status} - ${response.statusText}`);
+					throw new Error(response.status, response.statusText);
 				}	
 			 	const data = await response.json();
 				const peopleDetails = {
@@ -51,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getVehicleDetails: async (id) => {
 				const response = await fetch(`https://www.swapi.tech/api/vehicles/${id}`)
 				if (!response.ok) {
-					throw new Error(`${response.status} - ${response.statusText}`);
+					throw new Error(response.status, response.statusText);
 				}
 				const data = await response.json();
 				const updatedVehicleDetails = {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
-const PlanetCard = ({ name, uid, url }) => {
+const PlanetCard = ({ uid, name, url }) => {
     const { store, actions} = useContext(Context);
 
     useEffect(() => {
